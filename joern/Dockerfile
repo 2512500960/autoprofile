@@ -32,7 +32,8 @@ RUN tar xfz joern-tools.tar.gz
 
 # Install python-joern
 WORKDIR /joern-0.3.1/python-joern-0.3.1
-RUN git clone https://github.com/technige/py2neo/ && cd py2neo && git checkout fc3299d06065bceccde0daf7de04473d8b319abb && python setup.py install
+RUN git clone https://github.com/technige/py2neo/ && cd py2neo && git checkout fc3299d06065bceccde0daf7de04473d8b319abb && sed -i 's/socket_timeout = 30/socket_timeout = 300/'\
+ py2neo/packages/httpstream/http.py  && python setup.py install
 RUN python setup.py install
 
 # Install joern-tools
